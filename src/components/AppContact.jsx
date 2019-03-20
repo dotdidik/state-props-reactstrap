@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import AppCarousel from './common/AppCarousel';
-import { Container, Row, Col} from 'reactstrap';
+import AppHeader from './AppHeader';
+import { Container, Row, Col, Button} from 'reactstrap';
 import AppCard from './common/Card';
 import axios from 'axios';
 
-export default class AppBody extends Component {
+export default class AppContact extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,11 +72,32 @@ export default class AppBody extends Component {
         </Col>
       )
     });
-    
+    const results = this.state.results.map((top, index) => {
+      return(
+        <Col md='4' key={index}>
+        <AppCard
+          image={top.categories}
+          title={top.title}
+          harga={top.content}
+        />
+        </Col>
+      )
+    })
     return (
       <div>
-        <AppCarousel />
+        <AppHeader />
         <Container className="body-content">
+        <h2>Sortir</h2>
+          <Row className='d-flex'>
+            <label>
+              select:
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <Button onClick={this.onChangeResult}>
+              send
+            </Button>
+            {results}
+          </Row>
           <h2>Products</h2>
           <Row className='d-flex'>
             {looping}
@@ -87,7 +108,6 @@ export default class AppBody extends Component {
             {top}
           </Row>
           <hr/>
-        
         </Container>
       </div>
     )

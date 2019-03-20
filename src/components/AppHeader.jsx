@@ -10,7 +10,9 @@ import { Collapse,
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    Container } from 'reactstrap'
+    Container } from 'reactstrap';
+
+import { Link } from 'react-router-dom';
 
 class AppHeader extends Component{
     constructor(props) {
@@ -29,21 +31,19 @@ class AppHeader extends Component{
       render() {
         return (
           <div>
-            <Navbar color="bg-info" light expand="md">
+            <Navbar color="success" expand="md">
               <Container>
-              <NavbarBrand className='text-white' href="/">reactstrap</NavbarBrand>
+              <NavbarBrand className='text-white' ><Link to='/'> Home </Link></NavbarBrand>
+              <NavbarBrand className='text-white' ><Link to='/products'> Products </Link></NavbarBrand>
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem >
-                    <NavLink className='text-white' href="/components/">Components</NavLink>
-                  </NavItem>
-                  <NavItem >
-                    <NavLink className='text-white' href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                    <NavLink className='text-white'><Link to='/about-me'>About</Link></NavLink>
                   </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
-                      Options
+                      {this.props.opsi}
                     </DropdownToggle>
                     <DropdownMenu right>
                       <DropdownItem>
@@ -54,7 +54,7 @@ class AppHeader extends Component{
                       </DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem>
-                        Reset
+                        <Link to='/cms'>cms</Link>
                       </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>

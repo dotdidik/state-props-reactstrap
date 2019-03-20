@@ -2,7 +2,6 @@ import React from 'react';
 import AppHeader from './components/AppHeader';
 import AppBody from './components/AppBody';
 import AppFooter from './components/AppFooter';
-import './assets/style/Main.css';
  
 class Induk extends React.Component{
     render(){

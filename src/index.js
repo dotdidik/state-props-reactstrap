@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Induk from './Induk'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import AppRouter from './AppRouter';
 
-ReactDOM.render(<Induk />, document.getElementById('root'));
+ReactDOM.render(<AppRouter />, document.getElementById('root'));
