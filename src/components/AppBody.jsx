@@ -3,6 +3,7 @@ import AppCarousel from './common/AppCarousel';
 import { Container, Row, Col} from 'reactstrap';
 import AppCard from './common/Card';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 export default class AppBody extends Component {
   constructor(props) {
@@ -53,12 +54,14 @@ export default class AppBody extends Component {
     const looping = this.state.products.map((prod, index) => {
       return(
         <Col md='4' key={index}>
-        <AppCard
-          image={prod.categories}
-          title={prod.title}
-          harga={prod.content}
-        />
-      </Col>
+          <Link to={`/${prod.id}`}>
+            <AppCard
+              image={prod.categories}
+              title={prod.title}
+              harga={prod.content}
+            />
+          </Link>  
+        </Col>
       )}
     );
     const top = this.state.topproducts.map((top, index) => {
@@ -69,25 +72,28 @@ export default class AppBody extends Component {
           title={top.title}
           harga={top.content}
         />
+        comment
         </Col>
       )
     });
     
+    let productsview;
+
+    if(this.state.products.length === 0 ){
+      productsview = <h1>Tidak ada product</h1>
+    } else {
+          productsview = <h1>ADA DATA</h1>
+  }
     return (
       <div>
         <AppCarousel />
         <Container className="body-content">
-          <h2>Products</h2>
-          <Row className='d-flex'>
-            {looping}
-          </Row>
-          <hr/>
+          <h2 className='product'>Products</h2>
+          { productsview }
           <h2>Top Products</h2>
           <Row className='d-flex'>
             {top}
           </Row>
-          <hr/>
-        
         </Container>
       </div>
     )

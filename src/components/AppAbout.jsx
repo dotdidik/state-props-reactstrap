@@ -11,7 +11,7 @@ class AppAbout extends Component {
     }
 
     componentDidMount(){
-        axios.get('https://reduxblog.herokuapp.com/api/posts?key=didik')
+        axios.get('http://simplepostapi.herokuapp.com/posts/')
         .then(response => {
           this.setState({ datas : response.data})
           console.log('hay', response.data)
@@ -21,9 +21,6 @@ class AppAbout extends Component {
   render() {
     return (
       <div>
-        <AppHeader
-            opsi='This is About'
-        />
         <h1>Iam About</h1>
       </div>
     )

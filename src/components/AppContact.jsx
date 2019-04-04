@@ -25,9 +25,9 @@ export default class AppContact extends Component {
   //get data with axios method GET
   componentDidMount(){
     axios.get('http://reduxblog.herokuapp.com/api/posts?key=products')
-    .then(res => {
+    .then(response => {
         this.setState({
-          products: res.data
+          products: response.data
         })
     });
     axios.get('http://reduxblog.herokuapp.com/api/posts?key=topproducts')

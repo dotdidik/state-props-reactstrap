@@ -10,25 +10,48 @@ import { Collapse,
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    Container } from 'reactstrap';
+    Container,
+    Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { Link } from 'react-router-dom';
+import store from 'store';
+import isLoggedIn from '../helper/is_logged_in'
+import { Redirect } from 'react-router-dom';
 
 class AppHeader extends Component{
     constructor(props) {
-        super(props);
-    
-        this.toggle = this.toggle.bind(this);
+        super(props); 
         this.state = {
-          isOpen: false
+          isOpen: false,
+          modal: false,
+          email: '',
+          password: '',
+          error: false
         };
+
+        this.toggle = this.toggle.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
       }
       toggle() {
         this.setState({
           isOpen: !this.state.isOpen
         });
       }
+
+      handleLogout = (e) => {
+        store.remove('loggedIn');
+      }
+
       render() {
+
+        let auth;
+
+        if( isLoggedIn() == false){
+          auth = <Link to='/login'>login</Link>
+        } else {
+          auth =  <Button onClick={this.handleLogout}>Logout</Button>
+        }
+
         return (
           <div>
             <Navbar color="success" expand="md">
@@ -40,6 +63,9 @@ class AppHeader extends Component{
                 <Nav className="ml-auto" navbar>
                   <NavItem >
                     <NavLink className='text-white'><Link to='/about-me'>About</Link></NavLink>
+                  </NavItem>
+                  <NavItem>
+                    {auth}
                   </NavItem>
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
@@ -54,7 +80,7 @@ class AppHeader extends Component{
                       </DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem>
-                        <Link to='/cms'>cms</Link>
+                        {auth}
                       </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
